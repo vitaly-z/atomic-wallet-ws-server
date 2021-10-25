@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+<h1>Look at the server log or DevTools to see if the connection happened</h1>
+</body>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+    let socket = io({
+        transports: ["websocket"],
+        query: {
+            userId: 'USERID123'
+            //userId: 'a5683354-0571-37ab-b5ba-4160c9703058'
+        }
+    });
+
+    socket.on("connect", () => {
+        console.log('socket.io connected');
+
+        // either with send()
+        // socket.send("Hello!");
+
+        // or with emit() and custom event names
+        // socket.emit("salutations", "Hello!", { "mr": "john" }, Uint8Array.from([1, 2, 3, 4]));
+    });
+
+    // handle the event sent with socket.send()
+    socket.on("message", data => {
+        console.log(data);
+    });
+</script>
+</html>
